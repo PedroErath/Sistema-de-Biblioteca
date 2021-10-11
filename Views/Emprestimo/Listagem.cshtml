@@ -1,6 +1,9 @@
+@using System;
 @model ICollection<Emprestimo>
 @{
     ViewData["Title"] = "Listagem de Empréstimos";
+
+    string Classe = "";
 }
 
 <div class="row">
@@ -38,7 +41,15 @@
                 <tbody>
                     @foreach(Emprestimo e in Model)
                     {
-                    <tr>
+                        @if ((System.DateTime.Compare(System.DateTime.Now, e.DataDevolucao)>0))
+                        {
+                            Classe="text-danger";
+                        }
+                        else
+                        {
+                            Classe="";
+                        }
+                    <tr class="@Classe">
                         <td>@e.Id</td>
                         <td>@e.NomeUsuario</td>
                         <td>@e.DataEmprestimo.ToString("dd/MM/yyyy")</td>
