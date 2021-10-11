@@ -66,13 +66,13 @@ namespace Biblioteca.Models
                     consulta = bc.Emprestimos;
                 }
 
-                List<Emprestimo>ListaConsulta = consulta.OrderBy(e => e.DataEmprestimo).ToList();
+                List<Emprestimo>ListaConsulta = consulta.OrderByDescending(e => e.DataDevolucao).ToList();
 
                 for(int i = 0; i < ListaConsulta.Count; i++)
                 {
                     ListaConsulta[i].Livro = bc.Livros.Find(ListaConsulta[i].LivroId);
                 }
-                
+
                 return ListaConsulta;
             }
         }
